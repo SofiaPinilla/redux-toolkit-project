@@ -10,13 +10,11 @@ const initialState = {
   message: "",
 };
 
-
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     reset: (state) => {
-      state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
       state.message = "";
@@ -24,15 +22,15 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(login.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.isSuccess = true;
-      state.message = action.payload;
-    })
-    .addCase(login.rejected, (state, action) => {
-      state.isError = true;
-      state.message = action.payload;
-    })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isSuccess = true;
+        state.message = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isError = true;
+        state.message = action.payload;
+      })
 
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
@@ -45,7 +43,6 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       });
-
   },
 });
 
@@ -69,7 +66,6 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     return thunkAPI.rejectWithValue(message);
   }
 });
-
 
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {
