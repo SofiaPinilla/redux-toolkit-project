@@ -27,6 +27,7 @@ const Header = () => {
             <span><Link to="/register">Register</Link></span>
           </>
         }
+        {user?.user.rol === 'admin' ? <span><Link to="/admin">Admin</Link></span>:''}
       </div>
     </nav>
   );

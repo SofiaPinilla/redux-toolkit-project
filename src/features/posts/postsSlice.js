@@ -4,7 +4,7 @@ import postsService from "./postsService";
 const initialState = {
   posts: [],
   isLoading: false,
-  post:{}
+  post: {},
 };
 
 export const getAll = createAsyncThunk("posts/getAll", async () => {
@@ -16,13 +16,21 @@ export const getAll = createAsyncThunk("posts/getAll", async () => {
 });
 
 export const getById = createAsyncThunk("posts/getById", async (id) => {
-    try {
-      return await postsService.getById(id);
-    } catch (error) {
-      console.error(error);
-    }
-  });
-  
+  try {
+    return await postsService.getById(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const deletePost = createAsyncThunk("posts/deletePost", async (id) => {
+  try {
+    return await postsService.deletePost(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -39,8 +47,14 @@ export const postsSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getById.fulfilled, (state, action) => {
-        state.post = action.payload;
-      });  
+      state.post = action.payload;
+    });
+    builder.addCase(deletePost.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.posts = state.posts.filter(
+        (post) => post.id !== +action.payload.id
+      );
+    });
   },
 });
 

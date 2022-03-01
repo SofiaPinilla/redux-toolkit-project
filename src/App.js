@@ -7,6 +7,7 @@ import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import PostDetail from "./components/Home/Posts/PostDetail/PostDetail";
+import Admin from "./components/Admin/Admin";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </div>
