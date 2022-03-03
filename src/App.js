@@ -8,6 +8,9 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import PostDetail from "./components/Home/Posts/PostDetail/PostDetail";
 import Admin from "./components/Admin/Admin";
+import PrivateZone from "./guards/PrivateZone";
+import AdminZone from "./guards/AdminZone";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
@@ -18,9 +21,24 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateZone>
+                <Profile />
+              </PrivateZone>
+            }
+          />
           <Route path="/post/:id" element={<PostDetail />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminZone>
+                <Admin />
+              </AdminZone>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
