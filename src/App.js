@@ -11,7 +11,7 @@ import Admin from "./components/Admin/Admin";
 import PrivateZone from "./guards/PrivateZone";
 import AdminZone from "./guards/AdminZone";
 import NotFound from "./components/NotFound/NotFound";
-
+import Search from "./components/Search/Search";
 function App() {
   return (
     <div className="App">
@@ -38,6 +38,7 @@ function App() {
               </AdminZone>
             }
           />
+          <Route path="/search/:postName" element={<Search />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
